@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favorites - Book Explorer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center">
+    <div class="text-2xl font-bold text-sky-600 mb-2 sm:mb-0">Book Explorer</div>
+    <ul class="flex flex-col sm:flex-row sm:space-x-4 text-center sm:text-left">
+      <li><a href="index.html" class="block py-1 hover:text-sky-500">Home</a></li>
+      <li><a href="favorites.html" class="block py-1 hover:text-sky-500 font-semibold text-sky-600">Favorites</a></li>
+      <li><a href="#" class="block py-1 hover:text-sky-500">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="bg-blue-100 p-6 md:p-12 text-center">
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">Your Favorite Books</h1>
+    <p class="text-gray-700 text-base md:text-lg">A collection of books you’ve saved.</p>
+  </header>
+
+  <!-- Favorites Grid -->
+  <main class="p-6">
+    <div id="favorites-grid" class="grid gap-4 sm:gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white shadow-inner mt-10 p-4 text-center text-sm md:text-base text-gray-600">
+    &copy; 2025 Book Explorer. All rights reserved.
+  </footer>
+
+  <!-- JS -->
+  <script>
+    const FAVORITES_KEY = "book_favorites";
+
+    function getFavorites() {
+      const stored = localStorage.getItem(FAVORITES_KEY);
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveFavorites(favorites) {
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+    }
+
+    function removeFavorite(bookId) {
+      const favorites = getFavorites().filter(b => b.id !== bookId);
+      saveFavorites(favorites);
+      renderFavorites();
+    }
+
+    const grid = document.getElementById("favorites-grid");
+
+    function renderFavorites() {
+      const favorites = getFavorites();
+      if (!favorites.length) {
+        grid.innerHTML = '<p class="col-span-full text-center text-gray-600">No favorites yet.</p>';
+        return;
+      }
+
+      grid.innerHTML = favorites.map(book => `
+        <div class="bg-white shadow rounded overflow-hidden">
+          <img src="${book.image}" alt="${book.title}" class="w-full h-56 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold text-lg mb-2">${book.title}</h3>
+            <p class="text-gray-600 text-sm">${book.author}</p>
+            <button class="mt-2 bg-red-500 text-white px-3 py-1 rounded remove-btn" data-id="${book.id}">Remove</button>
+          </div>
+        </div>
+      `).join('');
+
+      document.querySelectorAll(".remove-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          removeFavorite(btn.dataset.id);
+        });
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", renderFavorites);
+  </script>
+
+</body>
+</html>
