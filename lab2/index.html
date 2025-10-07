@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Explorer - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center">
+    <div class="text-2xl font-bold text-sky-600 mb-2 sm:mb-0">Book Explorer</div>
+    <ul class="flex flex-col sm:flex-row sm:space-x-4 text-center sm:text-left">
+      <li><a href="index.html" class="block py-1 hover:text-sky-500">Home</a></li>
+      <li><a href="favorites.html" class="block py-1 hover:text-sky-500">Favorites</a></li>
+      <li><a href="#" class="block py-1 hover:text-sky-500">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <header class="bg-blue-100 p-6 md:p-12 text-center">
+    <h1 class="text-3xl md:text-5xl font-bold mb-4">Discover Your Next Favorite Book</h1>
+    <p class="text-gray-700 text-base md:text-xl">Browse, search, and save your favorite books with ease.</p>
+  </header>
+
+  <!-- Search Bar -->
+  <div class="text-center my-6">
+    <input id="searchInput" type="text" placeholder="Search by title or author..."
+      class="px-4 py-2 border rounded w-3/4 md:w-1/2 focus:outline-none focus:ring focus:border-blue-300">
+  </div>
+
+  <!-- Featured Books -->
+  <main class="p-6">
+    <h2 class="text-2xl font-bold mb-6 text-center">Featured Books</h2>
+
+    <div id="bookGrid" class="grid gap-4 sm:gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+
+      <!-- Book 1 -->
+      <div class="bg-white shadow rounded overflow-hidden book-item">
+        <img src="./Book1.jpg" alt="Book 1" class="w-full h-56 object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold text-lg mb-2">The Passion Within</h3>
+          <p class="text-gray-600 text-sm">Lisa Franke</p>
+          <button class="mt-2 bg-blue-600 text-white px-3 py-1 rounded add-favorite-btn"
+                  data-id="1"
+                  data-title="The Passion Within"
+                  data-author="Lisa Franke"
+                  data-image="./Book1.jpg">
+            Add to Favorites
+          </button>
+        </div>
+      </div>
+
+      <!-- Book 2 -->
+      <div class="bg-white shadow rounded overflow-hidden book-item">
+        <img src="./Book2.jpg" alt="Book 2" class="w-full h-56 object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold text-lg mb-2">Eat Beautiful</h3>
+          <p class="text-gray-600 text-sm">Tosca Reno</p>
+          <button class="mt-2 bg-blue-600 text-white px-3 py-1 rounded add-favorite-btn"
+                  data-id="2"
+                  data-title="Eat Beautiful"
+                  data-author="Tosca Reno"
+                  data-image="./Book2.jpg">
+            Add to Favorites
+          </button>
+        </div>
+      </div>
+
+      <!-- Book 3 -->
+      <div class="bg-white shadow rounded overflow-hidden book-item">
+        <img src="./Book3.jpg" alt="Book 3" class="w-full h-56 object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold text-lg mb-2">The Power of Your Subconscious Mind</h3>
+          <p class="text-gray-600 text-sm">Dr. Joseph Murphy</p>
+          <button class="mt-2 bg-blue-600 text-white px-3 py-1 rounded add-favorite-btn"
+                  data-id="3"
+                  data-title="The Power of Your Subconscious Mind"
+                  data-author="Dr. Joseph Murphy"
+                  data-image="./Book3.jpg">
+            Add to Favorites
+          </button>
+        </div>
+      </div>
+
+      <!-- Book 4 -->
+      <div class="bg-white shadow rounded overflow-hidden book-item">
+        <img src="./Image of book4.jpg" alt="Book 4" class="w-full h-56 object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold text-lg mb-2">WRITE IDEAS</h3>
+          <p class="text-gray-600 text-sm">Steven Johnson</p>
+          <button class="mt-2 bg-blue-600 text-white px-3 py-1 rounded add-favorite-btn"
+                  data-id="4"
+                  data-title="WRITE IDEAS"
+                  data-author="Steven Johnson"
+                  data-image="./Image of book4.jpg">
+            Add to Favorites
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bg-white shadow-inner mt-10 p-4 text-center text-sm md:text-base text-gray-600">
+    &copy; 2025 Book Explorer. All rights reserved.
+  </footer>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
+
+
