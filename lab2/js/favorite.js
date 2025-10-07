@@ -1,20 +1,38 @@
 // favorites.js
+// favorites.js
 
-let favorites = [];
+const FAVORITES_KEY = "book_favorites";
 
-// Add book to favorites
-export function addFavorite(book) {
-  favorites.push(book);
-  console.log(`${book.title} added to favorites.`);
+// Load favorites from localStorage (if any)
+export function getFavorites() {
+  const stored = localStorage.getItem(FAVORITES_KEY);
+  return stored ? JSON.parse(stored) : [];
 }
 
-// Remove book from favorites
+// Save favorites to localStorage
+function saveFavorites(favorites) {
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+}
+
+// Add a book to favorites
+export function addFavorite(book) {
+  const favorites = getFavorites();
+
+  // avoid duplicates
+  if (!favorites.find(fav => fav.id === book.id)) {
+    favorites.push(book);
+    saveFavorites(favorites);
+    console.log(`${book.title} added to favorites.`);
+  } else {
+    console.log(`${book.title} is already in favorites.`);
+  }
+}
+
+// Remove a book from favorites
 export function removeFavorite(bookId) {
+  let favorites = getFavorites();
   favorites = favorites.filter(b => b.id !== bookId);
+  saveFavorites(favorites);
   console.log(`Book with id ${bookId} removed from favorites.`);
 }
 
-// Get all favorites
-export function getFavorites() {
-  return favorites;
-}
